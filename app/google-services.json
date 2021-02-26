@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "984057279071",
+    "firebase_url": "https://uploadimage-94637.firebaseio.com",
+    "project_id": "uploadimage-94637",
+    "storage_bucket": "uploadimage-94637.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984057279071:android:eaf3e877d019b4e5c561ea",
+        "android_client_info": {
+          "package_name": "com.example.imagelink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "984057279071-n1mbln91r7akf58gvrfab2e3e7rvn7t2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCstMxuadWIcCVxwmK3HX9_cFnDG6EZYTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "984057279071-n1mbln91r7akf58gvrfab2e3e7rvn7t2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984057279071:android:6649bbc75172c4c3c561ea",
+        "android_client_info": {
+          "package_name": "com.example.uploadphoto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "984057279071-n1mbln91r7akf58gvrfab2e3e7rvn7t2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCstMxuadWIcCVxwmK3HX9_cFnDG6EZYTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "984057279071-n1mbln91r7akf58gvrfab2e3e7rvn7t2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984057279071:android:75fd6f58d749f107c561ea",
+        "android_client_info": {
+          "package_name": "edu.uc.jonesbr.plantplaces"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "984057279071-n1mbln91r7akf58gvrfab2e3e7rvn7t2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCstMxuadWIcCVxwmK3HX9_cFnDG6EZYTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "984057279071-n1mbln91r7akf58gvrfab2e3e7rvn7t2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
