@@ -16,6 +16,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,16 +36,8 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
 
 
-    Button btnbrowse, btnupload, btnnext;
-    EditText txtdata ;
-    EditText txtdata1 ;
-    EditText txtdata2 ;
-    ImageView imgview;
-    Uri FilePathUri;
-    StorageReference storageReference;
-    DatabaseReference databaseReference;
-    int Image_Request_Code = 7;
-    ProgressDialog progressDialog ;
+    TextView txtdata1 ;
+    TextView txtdata2 ;
 
 
     @Override
@@ -52,32 +45,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_main );
 
-        storageReference = FirebaseStorage.getInstance().getReference("Images");
-        databaseReference = FirebaseDatabase.getInstance().getReference("Images");
-        btnbrowse = (Button)findViewById(R.id.btnbrowse);
-        btnupload= (Button)findViewById(R.id.btnupload);
 
 
-        //add button
-        btnnext=(Button)findViewById ( R.id.button_next );
-
-
-
-        txtdata = (EditText)findViewById(R.id.txtdata);
-        txtdata1 = (EditText)findViewById(R.id.txtdata1);
-        txtdata2 = (EditText)findViewById(R.id.txtdata2);
-        imgview = (ImageView)findViewById(R.id.image_view);
-        progressDialog = new ProgressDialog(MainActivity.this);// context name as per your project name
+        txtdata1 = (TextView)findViewById(R.id.textView2);
+        txtdata2 = (TextView)findViewById(R.id.textView3);
 
 
 
 
 
-        btnnext.setOnClickListener ( new View.OnClickListener () {
+
+        txtdata1.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,
-                        second_file.class);
+                        missing_Child.class);
+                startActivity(intent); // startActivity allow you to move
+            }
+        } );
+
+
+        txtdata2.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,
+                        found_child.class);
                 startActivity(intent); // startActivity allow you to move
             }
         } );
@@ -86,108 +78,4 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        btnbrowse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Image"), Image_Request_Code);
-
-            }
-        });
-        btnupload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // adding button click event
-
-
-
-
-
-
-
-                UploadImage();
-
-            }
-        });
-
-
-
-
-
-    }
-
-//finish om create
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == Image_Request_Code && resultCode == RESULT_OK && data != null && data.getData() != null) {
-
-            FilePathUri = data.getData();
-
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), FilePathUri);
-                imgview.setImageBitmap(bitmap);
-            }
-            catch (IOException e) {
-
-                e.printStackTrace();
-            }
-        }
-    }
-
-
-    public String GetFileExtension(Uri uri) {
-
-        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri)) ;
-
-    }
-
-
-    public void UploadImage() {
-
-        if (FilePathUri != null) {
-
-            progressDialog.setTitle("Image is Uploading...");
-            progressDialog.show();
-            StorageReference storageReference2 = storageReference.child(System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
-            storageReference2.putFile(FilePathUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                            String TempImageName = txtdata.getText().toString().trim();
-                            String TempImageName1 = txtdata1.getText().toString().trim();
-                            String TempImageName2 = txtdata2.getText().toString().trim();
-
-                            progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(), "Image Uploaded Successfully ", Toast.LENGTH_LONG).show();
-                            @SuppressWarnings("VisibleForTests")
-                            uploadinfo imageUploadInfo = new uploadinfo(TempImageName, TempImageName1, TempImageName2, taskSnapshot.getUploadSessionUri().toString());
-                            String ImageUploadId = databaseReference.push().getKey();
-                            databaseReference.child(ImageUploadId).setValue(imageUploadInfo);
-                        }
-                    });
-        }
-        else {
-
-            Toast.makeText(MainActivity.this, "Please Select Image or Add Image Name", Toast.LENGTH_LONG).show();
-
-        }
-    }
-
-
-
-
-
-
-
-
-
-}
+    }}

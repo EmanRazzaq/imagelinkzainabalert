@@ -1,5 +1,8 @@
 package com.example.imagelink;
 
+
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -9,17 +12,19 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -29,10 +34,10 @@ import java.io.IOException;
 
 
 
-public class second_file extends AppCompatActivity {
+public class missing_Child extends AppCompatActivity {
 
 
-    Button btnbrowse, btnupload, btnnext;
+    Button btnbrowse, btnupload;
     EditText txtdata ;
     EditText txtdata1 ;
     EditText txtdata2 ;
@@ -47,31 +52,23 @@ public class second_file extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_main );
+        setContentView ( R.layout.activity_missing__child);
 
-        storageReference = FirebaseStorage.getInstance().getReference("Images2");
-        databaseReference = FirebaseDatabase.getInstance().getReference("Images2");
+        storageReference = FirebaseStorage.getInstance().getReference("Missing");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Missing");
         btnbrowse = (Button)findViewById(R.id.btnbrowse);
         btnupload= (Button)findViewById(R.id.btnupload);
 
-        btnnext=(Button)findViewById ( R.id.button_next );
+
+
+
+
 
         txtdata = (EditText)findViewById(R.id.txtdata);
         txtdata1 = (EditText)findViewById(R.id.txtdata1);
         txtdata2 = (EditText)findViewById(R.id.txtdata2);
         imgview = (ImageView)findViewById(R.id.image_view);
-
-        progressDialog = new ProgressDialog(second_file.this);// context name as per your project name
-
-
-        btnnext.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(second_file.this,
-                        MainActivity.class);
-                startActivity(intent); // startActivity allow you to move
-            }
-        } );
+        progressDialog = new ProgressDialog(missing_Child.this);// context name as per your project name
 
 
         btnbrowse.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +84,12 @@ public class second_file extends AppCompatActivity {
         btnupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // adding button click event
+
+
+
+
+
 
 
                 UploadImage();
@@ -151,7 +154,7 @@ public class second_file extends AppCompatActivity {
                             progressDialog.dismiss();
                             Toast.makeText(getApplicationContext(), "Image Uploaded Successfully ", Toast.LENGTH_LONG).show();
                             @SuppressWarnings("VisibleForTests")
-                            uploadinfo2 imageUploadInfo = new uploadinfo2 (TempImageName, TempImageName1, TempImageName2, taskSnapshot.getUploadSessionUri().toString());
+                            uploadinfo imageUploadInfo = new uploadinfo(TempImageName, TempImageName1, TempImageName2, taskSnapshot.getUploadSessionUri().toString());
                             String ImageUploadId = databaseReference.push().getKey();
                             databaseReference.child(ImageUploadId).setValue(imageUploadInfo);
                         }
@@ -159,10 +162,15 @@ public class second_file extends AppCompatActivity {
         }
         else {
 
-            Toast.makeText(second_file.this, "Please Select Image or Add Image Name", Toast.LENGTH_LONG).show();
+            Toast.makeText(missing_Child.this, "Please Select Image or Add Image Name", Toast.LENGTH_LONG).show();
 
         }
     }
+
+
+
+
+
 
 
 
